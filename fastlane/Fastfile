@@ -242,9 +242,19 @@ platform :android do
 
         # Checkout all branches are available
         sh("git fetch")
+        sh("git checkout main")
+        sh("git branch")
+        sh("git submodule update --init --recursive")
+        sh("git reset --hard")
+        sh("git clean -f -fxd")
+
+        sh("git checkout develop")
+        sh("git branch")
+        sh("git submodule update --init --recursive")
+        sh("git reset --hard")
+        sh("git clean -f -fxd")
 
         # Create a new release branch
-        sh("git checkout develop")
         sh("git checkout -b #{branch_name}")
 
         File.open(appVersionFilePath, 'w') do |file|
